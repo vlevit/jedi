@@ -79,6 +79,10 @@ class ImportPath(pr.Base):
         for i in range(kill_count + int(is_like_search)):
             self.import_path.pop()
 
+        # Flask-specific import of extensions
+        if len(self.import_path) > 2 and self.import_path[:2] == ['flask', 'ext']:
+            self.import_path[:3] = ['flask_' + self.import_path[2]]
+
     def __repr__(self):
         return '<%s: %s>' % (type(self).__name__, self.import_stmt)
 
